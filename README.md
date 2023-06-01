@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+STEP 1 — CREATE A NEW RAILS APP AS AN API
+rails new books --database=postgresql --api
 
-Things you may want to cover:
+STEP 2— Configure CORS to allow frontend to make requests
+uncomment  gem 'rack-cors'
+then
+run bundle install
 
-* Ruby version
+uncomment the following code in config/initializers/cors.rb file 
+The new rails app comes with the string “example.com”.
+change it to “*” 
 
-* System dependencies
+STEP 3— Planning Models
+The first is a Book model that belongs_to a :publisher and a Publisher model that has_many :books 
 
-* Configuration
+STEP 3— Generate Models and Create Database
+rails g model Publisher name --no-testframework
+rails g model Book title description image_url publisher_id:integer number:integer artist writer --no-testframework
 
-* Database creation
+run rails db:create && rails db:migrate
 
-* Database initialization
+STEP 4 — Create Seed Data and Test your associations
+rails db:seed
 
-* How to run the test suite
+STEP 5— Generate Controllers
+rails g controller Books  
+rails g controller Publishers
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
+STEP 6 — Create Routes
